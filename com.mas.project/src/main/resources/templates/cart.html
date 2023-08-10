@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+	<div class="container col-12">
+		<div class="header_container">
+				<header>
+					<div class="header-subcontainer d-inline-flex flex-row col-12">
+						<div class ="search col-9">
+							<div class="input-group rounded search_container">
+								<span class="input-group-text border-0 magnifier" id="search-addon">
+							    <img src="/images/magnifier.png">
+							  	</span>
+							  	<input type="search" class="form-control rounded search_bar" placeholder="Search for the book you want and read it now... Sherlock Holmes, Harry Pot..." aria-label="Search" aria-describedby="search-addon" />
+							</div>
+						</div>
+						<div class ="navigation col-3 ">
+							<a th:href = "@{/books}"><img src="/images/wishlist.png" class="nav_img pl-4"></a>
+							<a href = "cart.html"><img src="/images/cart.png" class="nav_img pl-4"></a>
+							<a href = "my_account.html"><img src="/images/user_pic.png " class="nav_img pl-4" id="my_account" ></a>
+
+						</div>
+					</div>
+				</header>
+		</div>
+
+
+		<div class="main_cart_container">	
+			<div class="cart_container">
+				<div class="box2 col-12">
+					<h1 class="cart_title">Shopping Cart</h1>
+				</div>
+				<div  class="books_container">
+					<h2 class="books_container_title">My books:</h2>
+					<img src="/images/grey_line.png">
+					<div th:each ="book : ${books}" class="book_order col-12">
+						<div   class="books_images col-6">
+							<img class ="book_image" th:src="${book.imgUrl}">
+							<div class="book_description">
+								<h6 class="title" th:text="${book.title}">Title</h6>
+								<h5 class="publisher" th:text="${book.getPublisherFullname()}">Publisher</h5>
+								<p th:text="${book.price}" class="price">Price</p>
+							</div>
+						</div>
+						<div class="books_navigation col-6">
+									<a th:href="@{|/deleteProduct?id=${book.getId()}|}" class ="books_navigation_button" >
+									<img src="/images/bin_icon.png" alt="">
+									<p>Delete Book</p>
+									</a>
+						</div>
+						<img src="/images/grey_line.png">
+					</div>
+
+				</div>
+
+				<div class="total">
+					<p th:text ="'Total: ' + ${shoppingCart.totalMoney} + '$'" class="total_price"></p>
+					<a th:href=" @{/payment_method}"><button class="purchase">Make Purchase</button></a>
+				</div>
+
+			</div>
+		</div>
+
+
+		<div class="footer_container">
+			<footer>
+				<ul class="footer_nav col-5">
+					<li><a>Menu</a></li>
+					<li><a>About us</a></li>
+					<li><a>FAQ</a></li>
+					<li><a>Contacts</a></li>
+					<li><a>For Bussiness</a></li>
+				</ul>
+				<img src="/images/line.png" class="line">
+				<p class="copyright">@Copyright Bebra Booking </p>
+			</footer>
+		</div>
+</div>
+</body>
+</html>

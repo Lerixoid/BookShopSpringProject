@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/product_style.css">
+</head>
+<body>
+	<div class="container col-12">
+		<div class="header_container">
+				<header>
+					<div class="header-subcontainer d-inline-flex flex-row col-12">
+						<div class ="search col-9">
+							<div class="input-group rounded search_container">
+								<span class="input-group-text border-0 magnifier" id="search-addon">
+							    <img src="/images/magnifier.png">
+							  	</span>
+							  	<input type="search" class="form-control rounded search_bar" placeholder="Search for the book you want and read it now... Sherlock Holmes, Harry Pot..." aria-label="Search" aria-describedby="search-addon" />
+							</div>
+						</div>
+						<div class ="navigation col-3 ">
+							<a th:href = "@{/books}"><img src="/images/wishlist.png" class="nav_img pl-4"></a>
+							<a th:href = "@{/cart}"><img src="/images/cart.png" class="nav_img pl-4"></a>
+							<a href = "my_account.html"><img src="/images/user_pic.png " class="nav_img pl-4" id="my_account" ></a>
+
+						</div>
+					</div>
+				</header>
+		</div>
+		<div class="main_container col-12">	
+		<div class="subcontainer col-8">
+			<div class="product_image col-4">
+				<img th:src="${product_page.imgUrl}" class="book_image">
+				<p th:text="${product_page.rating}" class="rating"></p>
+				<img th:src="'/images/' + ${product_page.starPoints}+ 'stars.png'" src="/images/stars.png" class="star_rating">
+			</div>
+			<div class="product_description col-8">
+				<p th:text ="${product_page.title}" class="book_title"></p>
+				<p th:text ="${product_page.getPublisherFullname()}" class="author"></p>
+				<p th:text ="${product_page.publishDate}" class="publication_date"></p>
+				<p th:text ="${product_page.bookCategory.categoryName}" class="category">Category: science-fiction</p>
+				<h4  class="desription">Description</h4>
+				<p th:text ="${product_page.description}" class="desription_content"></p>
+					<p th:text ="${(product_page.getPrice())} + '$'" class="price col-4"></p>
+				<a th:href="@{|/buyProduct?id=${product_page.getId()}|}"><button  action="#"  method ="post" class="add_to_cart col-8" type="submit">Add To Cart </button></a>
+				</div>
+			</div>
+			<div class="reviews col-12">
+				<h2 class="reviews_headtitle">Reviews: </h2>
+				<div th:each = "comment : ${comments}" class="review_box">
+					<img th:src ="'/images/' + ${comment.starPoints}+ 'stars.png'"  class="star_rating">
+					<p th:text ="${comment.content}" class="review_content"></p>
+					<p th:text ="${comment.getUserFullname()}" class="review_author"></p>
+				</div>
+			</p>
+		</div>
+	</div>
+		<div class="footer_container">
+			<footer>
+				<ul class="footer_nav col-5">
+					<li><a>Menu</a></li>
+					<li><a>About us</a></li>
+					<li><a>FAQ</a></li>
+					<li><a>Contacts</a></li>
+					<li><a>For Bussiness</a></li>
+				</ul>
+				<img src="/images/line.png" class="line">
+				<p class="copyright">@Copyright Online Book Store</p>
+			</footer>
+		</div>
+	</div>
+
+		</div>				
+		</div>
+
+</body>
+</html>
